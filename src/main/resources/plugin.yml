@@ -1,0 +1,37 @@
+name: NebrixChatGames
+version: '0.0.1'
+main: com.chunksmith.nebrixChatGames.NebrixChatGames
+api-version: '1.21'
+authors: [ Chunksmith ]
+description: Official NebrixMC plugin.
+website: https://chunksmith.com
+commands:
+  cg:
+    description: Nebrix ChatGames
+    usage: /cg [start|stop|toggle|reload|top|stats|list]
+    aliases: [chatgames,games]
+permissions:
+  nebrix.cg.play:
+    description: Allow participation in chat games
+    default: true
+  nebrix.cg.top:
+    description: View leaderboard
+    default: true
+  nebrix.cg.stats:
+    description: View personal stats
+    default: true
+  nebrix.cg.admin.start:
+    description: Start a specific chat game
+    default: op
+  nebrix.cg.admin.stop:
+    description: Stop current round
+    default: op
+  nebrix.cg.admin.toggle:
+    description: Toggle auto-rotation
+    default: op
+  nebrix.cg.admin.reload:
+    description: Reload config
+    default: op
+  nebrix.cg.admin.list:
+    description: List games
+    default: op

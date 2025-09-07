@@ -1,0 +1,213 @@
+# Nebrix ChatGames Configuration
+# Modern configuration with Adventure API support
+
+settings:
+  # Worlds where chat games are disabled
+  disabled-worlds: ["example_world"]
+  
+  # Plugin prefix - supports both MiniMessage and legacy formats
+  prefix: "<gradient:#FF5EDF:#00C9FF><bold>CHAT GAMES</bold></gradient> <gray>»</gray>"
+  
+  # Require permission to play games
+  use-permission-toplay: false
+  
+  # Minimum players online to start games
+  min-players-online: 1
+
+  scheduler:
+    # Mode: rotate (automatic rotation) or manual (command-only)
+    mode: rotate
+    
+    # Time between automatic games (seconds)
+    interval-seconds: 300  # 5 minutes for testing, change to 1500 for production
+    
+    # Weighted random selection for game rotation
+    rotate-weight:
+      unscramble: 3
+      reaction: 3
+      math: 3
+    
+    # Fixed schedule support (unused when mode is 'rotate')
+    fixed:
+      enabled: false
+      cron: "0 */25 * * * ?"
+
+  round:
+    # How long players have to answer (seconds)
+    timeout-seconds: 30
+    
+    # Delay before accepting answers (prevents instant bots)
+    answer-warmup-ms: 500
+    
+    # Default case sensitivity for games
+    case-sensitive-default: false
+    
+    # Allow starting games that are disabled in config
+    allow-starting-from-disabled: false
+    
+    # Play sound when games start
+    play-sound: true
+    sound: "entity.player.levelup"  # Modern format
+    
+    # Show boss bar during games
+    bossbar: true
+    
+    # Show titles when games start
+    titles: true
+
+  anti-cheat:
+    # Max messages per second per player
+    rate-limit-per-sec: 3
+    
+    # Normalize similar-looking characters
+    normalize-homoglyphs: true
+    
+    # Remove color codes from answers
+    strip-colors: true
+    
+    # Ignore muted players (if supported by your chat plugin)
+    ignore-muted: true
+    
+    # Levenshtein distance tolerance for typos
+    levenshtein-tolerance:
+      default: 0
+      fillout: 1
+
+# Reward system configuration
+rewards:
+  base:
+    # Economy coins (requires Vault)
+    coins: 100
+    
+    # Custom crystals (via command)
+    crystals: 2
+    
+    # Commands to execute (use %player% placeholder)
+    commands: []
+    
+    # Items to give (format: "MATERIAL:AMOUNT")
+    items: ["EMERALD:1"]
+
+  # Bonus rewards (chance-based)
+  bonus-chance:
+    percent: 15
+    commands:
+      - "give %player% diamond 1"
+      - "tellraw %player% {\"text\":\"Bonus reward!\",\"color\":\"gold\"}"
+
+  # Per-game reward overrides
+  per-game:
+    math:
+      coins: 150
+      crystals: 3
+    unscramble:
+      coins: 125
+      crystals: 2
+
+# Game-specific configurations
+games:
+  unscramble:
+    enabled: true
+    case-sensitive: false
+    min-length: 4
+    max-length: 8
+    scramble-swaps: "3-6"
+
+  reaction:
+    enabled: true
+    case-sensitive: false
+
+  math:
+    enabled: true
+    case-sensitive: false
+    difficulty: 2
+    operators: ["+", "-", "*"]
+    division-integers-only: true
+
+# Data storage configuration
+storage:
+  type: sqlite
+  sqlite-file: "chatgames.db"
+  flush-interval-seconds: 30
+
+# External plugin integrations
+integration:
+  leaderboards:
+    enabled: false  # Set to true if you have Nebrix-Leaderboards
+
+  economy:
+    provider: "vault"
+
+  crystals:
+    award-command: "eco give %player% %amount%"  # Adjust for your economy plugin
+
+# Visual styling (Adventure API MiniMessage format)
+style:
+  # Header message for games
+  header: "<gradient:#FF5EDF:#00C9FF><bold>CHAT GAMES</bold></gradient> <gray>✦</gray>"
+  
+  # Main game announcement line
+  line: "<gray>You have <yellow><bold>%seconds%</bold></yellow> seconds to <color:#ff7bcb><bold>%verb%</bold></color>: <aqua>%subject%</aqua></gray>"
+
+  # Boss bar configuration
+  bossbar:
+    format: "<gradient:#FF5EDF:#00C9FF><bold>CHAT GAMES</bold></gradient> <gray>•</gray> <white>%game%</white> <gray>•</gray> <yellow>%prompt%</yellow>"
+    color: "PURPLE"  # PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE
+    style: "PROGRESS"  # PROGRESS, NOTCHED_6, NOTCHED_10, NOTCHED_12, NOTCHED_20
+
+  # Action bar countdown
+  actionbar: "<gray>⏳ <yellow><bold>%seconds%s</bold></yellow> remaining</gray>"
+
+  # Title display on game start
+  title:
+    enabled: true
+    main: "<gradient:#FF5EDF:#00C9FF><bold>CHAT GAMES</bold></gradient>"
+    subtitle: "<gray>%verb%: <aqua>%subject%</aqua></gray>"
+    fade-in-ms: 500
+    stay-ms: 2000
+    fade-out-ms: 500
+
+  # Game-specific action verbs
+  verb:
+    reaction: "type"
+    unscramble: "unscramble"
+    math: "solve"
+    trivia: "answer"
+    unreverse: "reverse"
+    fillout: "complete"
+    random: "type"
+    variable: "solve for"
+
+  # Win/lose messages
+  messages:
+    winner: "<green><bold>%player%</bold></green> <gray>won the</gray> <aqua>%game%</aqua> <gray>game! Answer:</gray> <yellow>%answer%</yellow>"
+    no-winner: "<gray>Time's up! The answer was:</gray> <yellow>%answer%</yellow>"
+    game-start: "<gray>New</gray> <aqua><bold>%game%</bold></aqua> <gray>game started!</gray>"
+
+# Sound effects
+sounds:
+  game-start: "entity.player.levelup"
+  game-win: "entity.player.experience.orb.pickup"
+  game-timeout: "block.note_block.bass"
+
+# Performance settings
+performance:
+  # Cache word lists in memory
+  cache-wordlists: true
+  
+  # Maximum concurrent games (usually 1)
+  max-concurrent-games: 1
+  
+  # Cleanup interval for expired data (seconds)
+  cleanup-interval: 3600  # 1 hour
+
+# Debug and logging
+debug:
+  # Enable verbose logging
+  verbose: false
+  
+  # Log all player answers (for debugging)
+  log-answers: false
+  
+  # Log performance metrics
+  log-performance: false
