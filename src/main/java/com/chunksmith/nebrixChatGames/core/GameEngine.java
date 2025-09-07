@@ -10,7 +10,7 @@ import com.chunksmith.nebrixChatGames.data.PlayerDataManager;
 import com.chunksmith.nebrixChatGames.rewards.RewardManager;
 import com.chunksmith.nebrixChatGames.ui.MessageManager;
 import com.chunksmith.nebrixChatGames.util.RateLimiter;
-import com.chunksmith.nebrixChatGames.utils.TextUtils;
+import com.chunksmith.nebrixChatGames.util.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;

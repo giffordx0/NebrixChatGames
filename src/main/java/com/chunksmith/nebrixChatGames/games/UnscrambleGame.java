@@ -2,7 +2,6 @@ package com.chunksmith.nebrixChatGames.games;
 import com.chunksmith.nebrixChatGames.NebrixChatGames;
 import com.chunksmith.nebrixChatGames.api.AbstractChatGame;
 import com.chunksmith.nebrixChatGames.api.GameRound;
-import com.chunksmith.nebrixChatGames.config.ConfigManager;
 import com.chunksmith.nebrixChatGames.util.WordProvider;
 import org.bukkit.entity.Player;
 
@@ -24,7 +23,7 @@ public class UnscrambleGame extends AbstractChatGame {
 
     private final WordProvider wordProvider;
 
-    public UnscrambleGame(NebrixChatGames plugin, WordProvider wordProvider, ConfigManager configManager) {
+    public UnscrambleGame(NebrixChatGames plugin, WordProvider wordProvider) {
         super(plugin);
         this.wordProvider = wordProvider;
     }
@@ -67,11 +66,11 @@ public class UnscrambleGame extends AbstractChatGame {
     private GameRound createRoundWithWords(String prompt, String answer) {
         return new GameRound(
                 getId(),
+                getDisplayName(),
                 prompt,
                 answer,
-                System.currentTimeMillis(),
-                getWarmupDuration(),
                 getTimeoutDuration(),
+                getWarmupDuration(),
                 isCaseSensitive()
         );
     }
@@ -79,11 +78,6 @@ public class UnscrambleGame extends AbstractChatGame {
     @Override
     public boolean isCorrectAnswer(String answer, Player player, GameRound round) {
         return checkSimpleAnswer(answer, round.getCorrectAnswer(), round.isCaseSensitive());
-    }
-
-    @Override
-    public String getCorrectAnswer(GameRound round) {
-        return round.getCorrectAnswer();
     }
 
     /**

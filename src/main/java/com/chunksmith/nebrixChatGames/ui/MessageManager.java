@@ -4,7 +4,7 @@ import com.chunksmith.nebrixChatGames.NebrixChatGames;
 import com.chunksmith.nebrixChatGames.api.ChatGame;
 import com.chunksmith.nebrixChatGames.api.GameRound;
 import com.chunksmith.nebrixChatGames.config.ConfigManager;
-import com.chunksmith.nebrixChatGames.utils.TextUtils;
+import com.chunksmith.nebrixChatGames.util.TextUtils;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;

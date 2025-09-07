@@ -35,6 +35,15 @@ public interface ChatGame {
     boolean isCorrectAnswer(String answer, Player player, GameRound round);
 
     /**
+     * Determine if this game is enabled and should appear in listings
+     *
+     * @return true if the game can be played
+     */
+    default boolean isEnabled() {
+        return true;
+    }
+
+    /**
      * Get the ID of this game (legacy method for compatibility)
      * @deprecated Use getId() instead
      */

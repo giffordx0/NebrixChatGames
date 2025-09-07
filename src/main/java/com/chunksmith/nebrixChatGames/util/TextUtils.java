@@ -1,4 +1,4 @@
-package com.chunksmith.nebrixChatGames.utils;
+package com.chunksmith.nebrixChatGames.util;
 
 import com.chunksmith.nebrixChatGames.NebrixChatGames;
 import net.kyori.adventure.text.Component;
