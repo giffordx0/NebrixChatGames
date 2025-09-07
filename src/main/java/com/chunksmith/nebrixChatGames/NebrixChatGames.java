@@ -1,6 +1,6 @@
 package com.chunksmith.nebrixChatGames;
 
-import com.chunksmith.nebrixChatGames.commands.ChatGamesCommand;
+import com.chunksmith.nebrixChatGames.command.ChatGamesCommand;
 import com.chunksmith.nebrixChatGames.config.ConfigManager;
 import com.chunksmith.nebrixChatGames.core.GameEngine;
 import com.chunksmith.nebrixChatGames.core.GameRegistry;
@@ -207,15 +207,15 @@ public final class NebrixChatGames extends JavaPlugin {
         try {
             // Register games based on config
             if (configManager.isGameEnabled("unscramble")) {
-                gameRegistry.registerGame(new UnscrambleGame(this, wordProvider, configManager));
+                gameRegistry.registerGame(new UnscrambleGame(this, wordProvider));
             }
 
             if (configManager.isGameEnabled("reaction")) {
-                gameRegistry.registerGame(new ReactionGame(this, wordProvider, configManager));
+                gameRegistry.registerGame(new ReactionGame(this, wordProvider));
             }
 
             if (configManager.isGameEnabled("math")) {
-                gameRegistry.registerGame(new MathGame(this, configManager));
+                gameRegistry.registerGame(new MathGame(this));
             }
 
             getLogger().info("Registered " + gameRegistry.getRegisteredGameCount() + " games");
@@ -234,7 +234,7 @@ public final class NebrixChatGames extends JavaPlugin {
             getLogger().info("Registering commands and events...");
 
             // Register main command
-            final PluginCommand mainCommand = getCommand("chatgames");
+            final PluginCommand mainCommand = getCommand("cg");
             if (mainCommand != null) {
                 final ChatGamesCommand commandExecutor = new ChatGamesCommand(
                         this, gameEngine, gameScheduler, configManager, gameRegistry);

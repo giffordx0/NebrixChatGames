@@ -47,6 +47,15 @@ public abstract class AbstractChatGame implements ChatGame {
     }
 
     /**
+     * Configuration prefix for this game inside the main config
+     *
+     * @return config path prefix
+     */
+    protected String getConfigPrefix() {
+        return "games." + getId();
+    }
+
+    /**
      * Utility method for simple string-based answer checking
      * @param playerAnswer The player's normalized answer
      * @param correctAnswer The correct answer

@@ -1,4 +1,4 @@
-package com.chunksmith.nebrixChatGames.commands;
+package com.chunksmith.nebrixChatGames.command;
 
 import com.chunksmith.nebrixChatGames.NebrixChatGames;
 import com.chunksmith.nebrixChatGames.api.ChatGame;
@@ -6,7 +6,7 @@ import com.chunksmith.nebrixChatGames.config.ConfigManager;
 import com.chunksmith.nebrixChatGames.core.GameEngine;
 import com.chunksmith.nebrixChatGames.core.GameRegistry;
 import com.chunksmith.nebrixChatGames.core.GameScheduler;
-import com.chunksmith.nebrixChatGames.utils.TextUtils;
+import com.chunksmith.nebrixChatGames.util.TextUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;
