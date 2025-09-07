@@ -81,8 +81,9 @@ public class ConfigManager {
             plugin.getLogger().warning("Invalid min-players-online: " + minPlayers + " (using default: 1)");
         }
 
-        // Validate scheduler settings
-        if (isSchedulerEnabled()) {
+        // Validate scheduler settings without relying on cache
+        final String schedulerMode = config.getString("settings.scheduler.mode", "manual");
+        if ("rotate".equalsIgnoreCase(schedulerMode)) {
             final int interval = config.getInt("settings.scheduler.interval-seconds", 300);
             if (interval < 60) {
                 plugin.getLogger().warning("Scheduler interval too short: " + interval + "s (minimum: 60s)");
